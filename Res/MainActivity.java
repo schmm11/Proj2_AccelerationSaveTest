@@ -1,5 +1,4 @@
-package com.example.msctest.proj2_accelerationsavetest;
-
+package com.example.michu.proj2_accelerationsavetest;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
         amount++;
 
-        String message1 = "mAccelGravityData X " + mAccelGravityData +System.getProperty ("line.separator");
+        String message1 = "mAccelGravityData X " + mAccelGravityData[0] +System.getProperty ("line.separator");
         message1 += "mAccelGravityData Y " + mAccelGravityData[1] +System.getProperty ("line.separator");
         message1 += "mAccelGravityData Z" + mAccelGravityData[2];
         txt1.setText(message1);
