@@ -44,8 +44,8 @@ public class Saver {
 
             fbw.append("Timestamp: "+ timestamp + "Data:" + mAccelGravityData.toString());
             fbw.newLine();
-            fbw.close();
             fbw.flush();
+            fbw.close();
             fileOutputStream.flush();
             fileOutputStream.close();
         } catch (FileNotFoundException e) {
