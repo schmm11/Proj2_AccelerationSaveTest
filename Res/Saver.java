@@ -1,4 +1,5 @@
-package com.example.msctest.proj2_accelerationsavetest;
+package com.example.michu.proj2_accelerationsavetest;
+
 
 import android.os.Environment;
 import android.util.Log;
@@ -12,7 +13,7 @@ import java.io.OutputStreamWriter;
 
 public class Saver {
 
-        private File file;
+    private File file;
     public Saver(){
         if(isExternalStorageWritable()){
             //nice go On
@@ -22,9 +23,16 @@ public class Saver {
             //fucked up
             Log.e("Error", "Not Writable");
         }
-        file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "AccelerationTest.txt");
+         //file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "AccelerationTest.txt");
+        File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Proj2Acceleration");
+
+        if (!filepath.exists()) {
+            filepath.mkdirs();
+        }
+        file = new File( filepath.getPath(), "AccelerationTest.txt");
         if (!file.exists()) {
             try {
+
                 file.createNewFile();
             } catch (IOException ioe) {
                 ioe.printStackTrace();
@@ -34,15 +42,13 @@ public class Saver {
     }
 
     public void save(long timestamp, float[] mAccelGravityData){
-
-
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(file, true);
             OutputStreamWriter writer = new OutputStreamWriter(fileOutputStream);
 
             BufferedWriter fbw = new BufferedWriter(writer);
 
-            fbw.append("Timestamp: "+ timestamp + "Data:" + mAccelGravityData.toString());
+            fbw.append("Timestamp: "+ timestamp + "Data ==> x: " + mAccelGravityData[0] + "; y: "  + mAccelGravityData[0] + "; z: " + mAccelGravityData[2] );
             fbw.newLine();
             fbw.flush();
             fbw.close();
@@ -53,23 +59,6 @@ public class Saver {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
-    }
-
-
-
-
-
-    public File getPublicAlbumStorageDir(String albumName) {
-        // Get the directory for the user's public pictures directory.
-        File file = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), albumName);
-        if (!file.mkdirs()) {
-            Log.e("ERROR", "Directory not created");
-        }
-        return file;
     }
 
 
@@ -91,7 +80,4 @@ public class Saver {
         }
         return false;
     }
-
-
-
 }
